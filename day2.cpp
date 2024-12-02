@@ -31,6 +31,7 @@ bool isSafe(std::vector<int> arr) {
 }
 
 int main() {
+    bool part2 = true;
     std::string fileName = "day2.txt";
 
     std::ifstream inputFile(fileName);
@@ -56,18 +57,27 @@ int main() {
 
     inputFile.close();
     int total = 0;
-    for (int i = 0; i < data.size(); ++i) {
-        int n = data[i].size();
-        for (int j = 0; j < n; j++) {
-            std::vector<int> result;
-            for (int k = 0; k < n; k++) {
-                if (k != j) {
-                    result.push_back(data[i][k]);
+    if (part2) {
+        for (int i = 0; i < data.size(); ++i) {
+            int n = data[i].size();
+            for (int j = 0; j < n; j++) {
+                std::vector<int> result;
+                for (int k = 0; k < n; k++) {
+                    if (k != j) {
+                        result.push_back(data[i][k]);
+                    }
+                }
+                if (isSafe(result)) {
+                    total++;
+                    break;  
                 }
             }
-            if (isSafe(result)) {
+        }
+    }
+    else {
+        for (int i = 0; i < data.size(); ++i) {
+            if (isSafe(data[i])) {
                 total++;
-                break;  
             }
         }
     }
